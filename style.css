@@ -1,3 +1,24 @@
-h1 {
-    color: blue;
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main--color--: #EE9B01;
+    --second--color--: #68904D;
+    --third--color--: #C8D2D1;
+    --fourth-color--: #DA6A00;
+    --fifth-color--: #14471E;
+}
+.container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: 100vh;
+}
+
+.right-container {
+    background-color: var(--main--color--);
+}
+.left-container {
+    background-color: var(--third--color--);
 }
