@@ -12,13 +12,13 @@
 }
 .container {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 3fr;
     height: 100vh;
 }
 
-.right-container {
+.left-container {
     background-color: var(--main--color--);
 }
-.left-container {
+.right-container {
     background-color: var(--third--color--);
 }
