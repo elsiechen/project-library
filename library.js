@@ -51,6 +51,5 @@ function display(){
         tr.appendChild(td4);
 
         tbody.appendChild(tr);
-        console.log(table);
     }
 }
