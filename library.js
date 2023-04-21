@@ -67,6 +67,8 @@ function display(){
     tbody.innerHTML = '';555
     for(let book of myLibrary){
         let tr = document.createElement('tr');
+        
+        
         let td1 = document.createElement('td');
         td1.textContent = book.title;
         tr.appendChild(td1);
@@ -83,6 +85,14 @@ function display(){
         td4.textContent = book.read;
         tr.appendChild(td4);
 
+        // remove button
+        let remove = document.createElement('td');
+        let removeBtn = document.createElement('button');
+        removeBtn.classList.add('removeBtn');
+        removeBtn.textContent = 'REMOVE';
+        remove.appendChild(removeBtn);
+        tr.appendChild(remove);
+        
         tbody.appendChild(tr);
     }
 }
