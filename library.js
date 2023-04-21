@@ -126,7 +126,6 @@ function display(){
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
 
-        // removeBtn.textContent = 'REMOVE';
         let img = document.createElement('img');
         img.setAttribute('src', 'trash-can.png');
         img.setAttribute('alt', 'Trash Can');
@@ -139,6 +138,23 @@ function display(){
         remove.appendChild(removeBtn);
         tr.appendChild(remove);
         
+        // edit button
+        let edit = document.createElement('td');
+        let editBtn = document.createElement('button');
+        editBtn.classList.add('editBtn');
+
+        let editImg = document.createElement('img');
+        editImg.setAttribute('src', 'edit.png');
+        editImg.setAttribute('alt', 'Square Edit Outline');
+        editImg.setAttribute('width', '20px');
+        editImg.setAttribute('height', '20px');
+
+        editBtn.appendChild(editImg);
+        editBtn.setAttribute('data-item', index);
+        console.log(`editBtn: ${editBtn}`);
+        edit.appendChild(editBtn);
+        tr.appendChild(edit);
+
         tbody.appendChild(tr);
     }
 }
