@@ -41,17 +41,24 @@ function addBookToLibrary(book) {
 }
 
 // Add book to library by form
-function addToLibrary(){
+function addToLibrary(event){
+    console.log(event);
+    event.preventDefault();
+    let checkRead = read.checked?true:false;
     let book = new Book(
         title.value, 
         author.value,
         pages.value,
-        read.value );
+        checkRead);
     myLibrary.push(book);
+    // clear inputs
+    clear();
+    // display myLibrary 
     display();
 }
 
 function display(){
+    tbody.innerHTML = '';555
     for(let book of myLibrary){
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');
@@ -74,4 +81,10 @@ function display(){
     }
 }
 
-
+// Clear form inputs
+function clear(){
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
+}
