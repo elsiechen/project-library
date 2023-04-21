@@ -2,6 +2,7 @@ let myLibrary = [];
 
 const table = document.querySelector('.table')
 const tbody = document.querySelector('.tbody');
+const form = document.querySelector('form');
 const addBtn = document.querySelector('#addBtn');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
@@ -25,8 +26,10 @@ addBookToLibrary(splat);
 display();
 
 // Add book to library event
-addBtn.addEventListener('click', addToLibrary);
+// Important: hook submit event to form instead of button
+form.addEventListener('submit', addToLibrary, true);
 
+// Check if pages is more than 
 function Book(title, author, pages, read) {
   // the constructor...
   this.title = title;
@@ -44,6 +47,8 @@ function addBookToLibrary(book) {
 function addToLibrary(event){
     console.log(event);
     event.preventDefault();
+    event.stopPropagation();
+    
     let checkRead = read.checked?true:false;
     let book = new Book(
         title.value, 
@@ -51,6 +56,7 @@ function addToLibrary(event){
         pages.value,
         checkRead);
     myLibrary.push(book);
+    console.log(myLibrary);
     // clear inputs
     clear();
     // display myLibrary 
