@@ -29,6 +29,18 @@ display();
 // Important: hook submit event to form instead of button
 form.addEventListener('submit', addToLibrary, true);
 
+// removeBtn event
+const removeBtns = document.querySelectorAll('.removeBtn');
+removeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        let index = btn.getAttribute('data-item');
+        console.log(`index: ${index}`);
+        let tr = document.querySelector(`tr[data-item='${index}']`);
+        console.log(`tr:${tr}`);
+        tbody.removeChild(tr);
+    });
+});
+
 // Check if pages is more than 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -67,7 +79,9 @@ function display(){
     tbody.innerHTML = '';555
     for(let book of myLibrary){
         let tr = document.createElement('tr');
-        
+        let index = myLibrary.indexOf(book);
+        console.log(`book index: ${index}`);
+        tr.setAttribute('data-item', index);
         
         let td1 = document.createElement('td');
         td1.textContent = book.title;
@@ -89,7 +103,10 @@ function display(){
         let remove = document.createElement('td');
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
+
         removeBtn.textContent = 'REMOVE';
+        removeBtn.setAttribute('data-item', index);
+
         remove.appendChild(removeBtn);
         tr.appendChild(remove);
         
