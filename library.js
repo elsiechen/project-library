@@ -95,7 +95,7 @@ function display(){
     for(let book of myLibrary){
         let tr = document.createElement('tr');
         let index = myLibrary.indexOf(book);
-        console.log(`book index: ${index}`);
+        // console.log(`book index: ${index}`);
         tr.setAttribute('data-item', index);
         
         let td1 = document.createElement('td');
