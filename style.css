@@ -22,3 +22,23 @@
 .right-container {
     background-color: var(--third--color--);
 }
+
+.toggleBtn, 
+.removeBtn {
+    background-color: var(--third--color--);
+    border: none;
+}
+
+.toggleBtn:hover,
+.removeBtn:hover {
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.removeBtn {
+    opacity: 0.6;
+}
+
+.removeBtn:hover {
+    opacity: 1;
+}

@@ -115,6 +115,7 @@ function display(){
         let toggleBtn = document.createElement('button');
         toggleBtn.classList.add('toggleBtn');
         toggleBtn.textContent = book.read?'V':'X';
+        toggleBtn.style.color = book.read?'green':'red';
         toggleBtn.setAttribute('data-item', index);
 
         td4.appendChild(toggleBtn);
@@ -125,9 +126,16 @@ function display(){
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
 
-        removeBtn.textContent = 'REMOVE';
-        removeBtn.setAttribute('data-item', index);
+        // removeBtn.textContent = 'REMOVE';
+        let img = document.createElement('img');
+        img.setAttribute('src', 'trash-can.png');
+        img.setAttribute('alt', 'Trash Can');
+        img.setAttribute('width', '20px');
+        img.setAttribute('height', '20px');
 
+        removeBtn.appendChild(img);
+        removeBtn.setAttribute('data-item', index);
+        console.log(`removeBtn: ${removeBtn}`);
         remove.appendChild(removeBtn);
         tr.appendChild(remove);
         
