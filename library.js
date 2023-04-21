@@ -62,7 +62,13 @@ function Book(title, author, pages, read) {
   this.read = read;
   this.toggle = function(){
     this.read = !this.read;
-  }
+  };
+  this.edit = function(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  };
 }
 
 // Add book to library manually
