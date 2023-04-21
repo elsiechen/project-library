@@ -16,26 +16,28 @@
                 <h1>Library</h1>
             </div>
             <form action="" method="">
-                <div class="title">
+                <div class="head">Add A New Book</div>
+                <div class="form-control">
                     <label for="title" class="title">Title:</label>
                     <input type="text"  id="title" name="title" required
                      minlength="2" maxlength="30" placeholder="Harry Potter">
                 </div>
-                <div class="author">
+                <div class="form-control">
                     <label for="author" class="author">Author:</label>
                     <input type="text"  id="author" name="author" required
                     minlength="2" maxlength="30" placeholder="J.K. Rowling">
                 </div>
-                <div class="pages">
+                <div class="form-control">
                     <label for="pages" class="pages">Total Pages:</label>
                     <input type="number" name="pages" id="pages" required
                     min="1" placeholder="625">
                 </div>
-                <div class="read">
+                <div class="form-control">
                     <input type="checkbox" name="read" id="read">
                     <label for="read">I have finished this book!</label>
                 </div>
-                <button type="submit" id="addBtn">Add A New Book</button>
+                <button type="submit" id="addBtn">ADD</button>
+                <button type="submit" id="editBtn">EDIT</button>
             </form>
             <footer>Made by Elsie</footer>
         </div>

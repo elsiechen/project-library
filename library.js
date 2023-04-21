@@ -3,11 +3,16 @@ let myLibrary = [];
 const table = document.querySelector('.table')
 const tbody = document.querySelector('.tbody');
 const form = document.querySelector('form');
+const head = document.querySelector('.head');
 const addBtn = document.querySelector('#addBtn');
+const editBtn = document.querySelector('#editBtn');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
+
+// Default: show add btn, hide edit btn
+editBtn.style.display = 'none';
 
 // Create book instances manually
 const harryPotter = new Book('Harry Potter And The Half Blood Prince', 'J.K. Rowling', 652, false);
@@ -42,6 +47,27 @@ removeBtns.forEach(btn => {
     });
 });
 
+// editBtn event
+const editBtns = document.querySelectorAll('.editBtn');
+editBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        head.innerHTML = 'Edit the Book';
+        addBtn.style.display = 'none';
+        editBtn.style.display = 'block';
+
+        let index = btn.getAttribute('data-item');
+        title.value = myLibrary[index].title;
+        author.value = myLibrary[index].author;
+        pages.value = myLibrary[index].pages;
+        let ifChecked = myLibrary[index].read;
+        // Important: if finish reading, set checkbox as checked
+        // else, remove checked from checkbox
+        ifChecked?read.setAttribute('checked', 'true'):
+                  read.removeAttribute('checked');
+    });
+});
+
+
 // Change read status toggle button event
 const toggleBtns = document.querySelectorAll('.toggleBtn');
 toggleBtns.forEach(btn => {
@@ -53,7 +79,6 @@ toggleBtns.forEach(btn => {
     });
 });
 
-// Check if pages is more than 
 function Book(title, author, pages, read) {
   // the constructor...
   this.title = title;
