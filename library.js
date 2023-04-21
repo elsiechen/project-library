@@ -35,6 +35,7 @@ removeBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         let index = btn.getAttribute('data-item');
         console.log(`index: ${index}`);
+        // Associate DOM element with book object using data- attribute
         let tr = document.querySelector(`tr[data-item='${index}']`);
         console.log(`tr:${tr}`);
         tbody.removeChild(tr);
