@@ -31,7 +31,7 @@ form.addEventListener('submit', addToLibrary, true);
 
 // removeBtn event
 const removeBtns = document.querySelectorAll('.removeBtn');
-removeBtns.forEach((btn) => {
+removeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         let index = btn.getAttribute('data-item');
         console.log(`index: ${index}`);
@@ -42,6 +42,17 @@ removeBtns.forEach((btn) => {
     });
 });
 
+// Change read status toggle button event
+const toggleBtns = document.querySelectorAll('.toggleBtn');
+toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        let index = btn.getAttribute('data-item');
+        myLibrary[index].toggle();
+        // console.log(myLibrary[index]);
+        btn.textContent = myLibrary[index].read?'V':'X';
+    });
+});
+
 // Check if pages is more than 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -49,6 +60,9 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.toggle = function(){
+    this.read = !this.read;
+  }
 }
 
 // Add book to library manually
@@ -96,8 +110,14 @@ function display(){
         td3.textContent = book.pages;
         tr.appendChild(td3);
 
+        // read button
         let td4 = document.createElement('td');
-        td4.textContent = book.read;
+        let toggleBtn = document.createElement('button');
+        toggleBtn.classList.add('toggleBtn');
+        toggleBtn.textContent = book.read?'V':'X';
+        toggleBtn.setAttribute('data-item', index);
+
+        td4.appendChild(toggleBtn);
         tr.appendChild(td4);
 
         // remove button
