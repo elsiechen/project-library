@@ -9,7 +9,7 @@ const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
 
-// Create book instances manually
+// // Create book instances manually
 const harryPotter = new Book('Harry Potter And The Half Blood Prince', 'J.K. Rowling', 652, false);
 const peppaPig = new Book('Peppa Pig and the Day at Snow Mountain','Nevil Astley and Mark Baker',36, true);
 const olivia = new Book('Dinner with Olivia', 'Emily Sollinger', 18, false);
@@ -25,33 +25,12 @@ addBookToLibrary(splat);
 
 display();
 
+
 // Add book to library event
 // Important: hook submit event to form instead of button
 form.addEventListener('submit', addToLibrary, true);
 
-// removeBtn event
-const removeBtns = document.querySelectorAll('.removeBtn');
-removeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        let index = btn.getAttribute('data-item');
-        console.log(`index: ${index}`);
-        // Associate DOM element with book object using data- attribute
-        let tr = document.querySelector(`tr[data-item='${index}']`);
-        console.log(`tr:${tr}`);
-        tbody.removeChild(tr);
-    });
-});
 
-// Change read status toggle button event
-const toggleBtns = document.querySelectorAll('.toggleBtn');
-toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        let index = btn.getAttribute('data-item');
-        myLibrary[index].toggle();
-        // console.log(myLibrary[index]);
-        btn.textContent = myLibrary[index].read?'V':'X';
-    });
-});
 
 // Check if pages is more than 
 function Book(title, author, pages, read) {
@@ -91,12 +70,13 @@ function addToLibrary(event){
 }
 
 function display(){
-    tbody.innerHTML = '';555
+    tbody.innerHTML = '';
     for(let book of myLibrary){
         let tr = document.createElement('tr');
-        let index = myLibrary.indexOf(book);
+        // let index = myLibrary.indexOf(book);
+        let item = book.title;
         // console.log(`book index: ${index}`);
-        tr.setAttribute('data-item', index);
+        tr.setAttribute('data-item', item);
         
         let td1 = document.createElement('td');
         td1.textContent = book.title;
@@ -110,13 +90,13 @@ function display(){
         td3.textContent = book.pages;
         tr.appendChild(td3);
 
-        // read button
+        // toggle read button
         let td4 = document.createElement('td');
         let toggleBtn = document.createElement('button');
         toggleBtn.classList.add('toggleBtn');
         toggleBtn.textContent = book.read?'V':'X';
         toggleBtn.style.color = book.read?'green':'red';
-        toggleBtn.setAttribute('data-item', index);
+        toggleBtn.setAttribute('data-item', item);
 
         td4.appendChild(toggleBtn);
         tr.appendChild(td4);
@@ -126,7 +106,6 @@ function display(){
         let removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
 
-        // removeBtn.textContent = 'REMOVE';
         let img = document.createElement('img');
         img.setAttribute('src', 'trash-can.png');
         img.setAttribute('alt', 'Trash Can');
@@ -134,13 +113,67 @@ function display(){
         img.setAttribute('height', '20px');
 
         removeBtn.appendChild(img);
-        removeBtn.setAttribute('data-item', index);
-        console.log(`removeBtn: ${removeBtn}`);
+        removeBtn.setAttribute('data-item', item);
+        // console.log(`removeBtn: ${removeBtn}`);
         remove.appendChild(removeBtn);
         tr.appendChild(remove);
         
         tbody.appendChild(tr);
+        console.log(removeBtn.getAttribute('data-item'));
     }
+    // removeBtn event
+    let removeBtns = document.querySelectorAll('.removeBtn');
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let item = btn.getAttribute('data-item');
+            console.log(`item: ${item}`);
+            // Associate DOM element with book object using data- attribute
+            let tr = document.querySelector(`tr[data-item='${item}']`);
+            // // console.log(`tr:${tr}`);
+            tbody.removeChild(tr);
+
+            // get index of this object in myLibrary
+            let index = -1;
+            for(let book of myLibrary){
+                index++;
+                if(book.title == item){
+                    break;
+                }
+            }
+            
+            // remove item from myLibrary
+            myLibrary.splice(index, 1);
+            // display();
+
+            console.log(index);
+            console.log(myLibrary);
+        });
+    });
+
+    // Change read status toggle button event
+    let toggleBtns = document.querySelectorAll('.toggleBtn');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let item = btn.getAttribute('data-item');
+            
+            // get index of this object in myLibrary
+            let index = -1;
+            for(let book of myLibrary){
+                index++;
+                if(book.title = item){
+                    break;
+                }
+            }
+            
+            myLibrary[index].toggle();
+            btn.innerHTML = myLibrary[index].read?'V':'X';
+            btn.style.color = myLibrary[index].read?'green':'red';
+            console.log(item);
+            console.log(myLibrary[index]);
+        });
+    });
+
+    console.log(removeBtns);
 }
 
 // Clear form inputs
