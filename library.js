@@ -4,15 +4,12 @@ const table = document.querySelector('.table')
 const tbody = document.querySelector('.tbody');
 const form = document.querySelector('form');
 const head = document.querySelector('.head');
-const addBtn = document.querySelector('#addBtn');
-const editBtn = document.querySelector('#editBtn');
+const add = document.querySelector('#add');
+const edit = document.querySelector('#edit');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
-
-// Default: show add btn, hide edit btn
-editBtn.style.display = 'none';
 
 // Create book instances manually
 const harryPotter = new Book('Harry Potter And The Half Blood Prince', 'J.K. Rowling', 652, false);
@@ -20,6 +17,9 @@ const peppaPig = new Book('Peppa Pig and the Day at Snow Mountain','Nevil Astley
 const olivia = new Book('Dinner with Olivia', 'Emily Sollinger', 18, false);
 const panda = new Book('Please, Mr. Panda', 'Steve Antony', 22, true);
 const splat = new Book('Splat the Cat Twice the Mice', 'Rob Scotton', 28, true);
+
+// Default: show add btn, hide edit btn
+edit.style.display = 'none';
 
 // Add book to library manually
 addBookToLibrary(harryPotter);
@@ -35,7 +35,7 @@ display();
 form.addEventListener('submit', addToLibrary, true);
 
 // removeBtn event
-const removeBtns = document.querySelectorAll('.removeBtn');
+let removeBtns = document.querySelectorAll('.removeBtn');
 removeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         let index = btn.getAttribute('data-item');
@@ -44,16 +44,26 @@ removeBtns.forEach(btn => {
         let tr = document.querySelector(`tr[data-item='${index}']`);
         console.log(`tr:${tr}`);
         tbody.removeChild(tr);
+        // remove book from library
+        myLibrary.splice(index, 1);
+        console.log(myLibrary);
+        display();
     });
 });
 
 // editBtn event
-const editBtns = document.querySelectorAll('.editBtn');
+let editBtns = document.querySelectorAll('.editBtn');
 editBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         head.innerHTML = 'Edit the Book';
-        addBtn.style.display = 'none';
-        editBtn.style.display = 'block';
+        add.style.display = 'none';
+        edit.style.display = 'block';
+
+        
+        const title = document.querySelector('#title');
+        const author = document.querySelector('#author');
+        const pages = document.querySelector('#pages');
+        const read = document.querySelector('#read');
 
         let index = btn.getAttribute('data-item');
         title.value = myLibrary[index].title;
@@ -64,18 +74,43 @@ editBtns.forEach(btn => {
         // else, remove checked from checkbox
         ifChecked?read.setAttribute('checked', 'true'):
                   read.removeAttribute('checked');
+        // set data- on edit btn
+        edit.setAttribute('data-item', index);
+        
+        display();
     });
 });
 
 
+// submit edit btn
+edit.addEventListener('click', editToLibrary);
+
+function editToLibrary(){
+    let index = edit.getAttribute('data-item');
+    console.log(`index: ${index}`);
+    myLibrary[index].title = title.value;
+    myLibrary[index].author = author.value;
+    myLibrary[index].pages = pages.value;
+    myLibrary[index].read = read.checked;
+    console.log(myLibrary[index]);
+
+    display();
+    clear();
+    head.innerHTML = 'Add A New Book';
+    add.style.display = 'block';
+    edit.style.display = 'none';
+}
+
 // Change read status toggle button event
-const toggleBtns = document.querySelectorAll('.toggleBtn');
+let toggleBtns = document.querySelectorAll('.toggleBtn');
 toggleBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         let index = btn.getAttribute('data-item');
+        console.log(`index: ${index}`);
         myLibrary[index].toggle();
-        // console.log(myLibrary[index]);
+        console.log(myLibrary[index]);
         btn.textContent = myLibrary[index].read?'V':'X';
+        btn.style.color = myLibrary[index].read?'green':'red';
     });
 });
 
@@ -119,14 +154,15 @@ function addToLibrary(event){
     clear();
     // display myLibrary 
     display();
+    
 }
 
 function display(){
-    tbody.innerHTML = '';555
+    tbody.innerHTML = '';
     for(let book of myLibrary){
         let tr = document.createElement('tr');
         let index = myLibrary.indexOf(book);
-        // console.log(`book index: ${index}`);
+        console.log(`book index: ${index}`);
         tr.setAttribute('data-item', index);
         
         let td1 = document.createElement('td');
@@ -165,12 +201,12 @@ function display(){
 
         removeBtn.appendChild(img);
         removeBtn.setAttribute('data-item', index);
-        console.log(`removeBtn: ${removeBtn}`);
+        // console.log(`removeBtn: ${removeBtn}`);
         remove.appendChild(removeBtn);
         tr.appendChild(remove);
         
         // edit button
-        let edit = document.createElement('td');
+        let editTd = document.createElement('td');
         let editBtn = document.createElement('button');
         editBtn.classList.add('editBtn');
 
@@ -182,12 +218,13 @@ function display(){
 
         editBtn.appendChild(editImg);
         editBtn.setAttribute('data-item', index);
-        console.log(`editBtn: ${editBtn}`);
-        edit.appendChild(editBtn);
-        tr.appendChild(edit);
+        // console.log(`editBtn: ${editBtn}`);
+        editTd.appendChild(editBtn);
+        tr.appendChild(editTd);
 
         tbody.appendChild(tr);
     }
+    console.log(myLibrary);
 }
 
 // Clear form inputs
