@@ -34,54 +34,6 @@ display();
 // Important: hook submit event to form instead of button
 form.addEventListener('submit', addToLibrary, true);
 
-// removeBtn event
-let removeBtns = document.querySelectorAll('.removeBtn');
-removeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        let index = btn.getAttribute('data-item');
-        console.log(`index: ${index}`);
-        // Associate DOM element with book object using data- attribute
-        let tr = document.querySelector(`tr[data-item='${index}']`);
-        console.log(`tr:${tr}`);
-        tbody.removeChild(tr);
-        // remove book from library
-        myLibrary.splice(index, 1);
-        console.log(myLibrary);
-        display();
-    });
-});
-
-// editBtn event
-let editBtns = document.querySelectorAll('.editBtn');
-editBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        head.innerHTML = 'Edit the Book';
-        add.style.display = 'none';
-        edit.style.display = 'block';
-
-        
-        const title = document.querySelector('#title');
-        const author = document.querySelector('#author');
-        const pages = document.querySelector('#pages');
-        const read = document.querySelector('#read');
-
-        let index = btn.getAttribute('data-item');
-        title.value = myLibrary[index].title;
-        author.value = myLibrary[index].author;
-        pages.value = myLibrary[index].pages;
-        let ifChecked = myLibrary[index].read;
-        // Important: if finish reading, set checkbox as checked
-        // else, remove checked from checkbox
-        ifChecked?read.setAttribute('checked', 'true'):
-                  read.removeAttribute('checked');
-        // set data- on edit btn
-        edit.setAttribute('data-item', index);
-        
-        display();
-    });
-});
-
-
 // submit edit btn
 edit.addEventListener('click', editToLibrary);
 
@@ -101,18 +53,6 @@ function editToLibrary(){
     edit.style.display = 'none';
 }
 
-// Change read status toggle button event
-let toggleBtns = document.querySelectorAll('.toggleBtn');
-toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        let index = btn.getAttribute('data-item');
-        console.log(`index: ${index}`);
-        myLibrary[index].toggle();
-        console.log(myLibrary[index]);
-        btn.textContent = myLibrary[index].read?'V':'X';
-        btn.style.color = myLibrary[index].read?'green':'red';
-    });
-});
 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -224,6 +164,67 @@ function display(){
 
         tbody.appendChild(tr);
     }
+
+    // Change read status toggle button event
+    let toggleBtns = document.querySelectorAll('.toggleBtn');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let index = btn.getAttribute('data-item');
+            console.log(`index: ${index}`);
+            myLibrary[index].toggle();
+            console.log(myLibrary[index]);
+            btn.textContent = myLibrary[index].read?'V':'X';
+            btn.style.color = myLibrary[index].read?'green':'red';
+        });
+    });
+
+    // removeBtn event
+    let removeBtns = document.querySelectorAll('.removeBtn');
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let index = btn.getAttribute('data-item');
+            console.log(`index: ${index}`);
+            // Associate DOM element with book object using data- attribute
+            let tr = document.querySelector(`tr[data-item='${index}']`);
+            console.log(`tr:${tr}`);
+            tbody.removeChild(tr);
+            // remove book from library
+            myLibrary.splice(index, 1);
+            console.log(myLibrary);
+            display();
+        });
+    });
+
+    // editBtn event
+    let editBtns = document.querySelectorAll('.editBtn');
+    editBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            head.innerHTML = 'Edit the Book';
+            add.style.display = 'none';
+            edit.style.display = 'block';
+
+            
+            const title = document.querySelector('#title');
+            const author = document.querySelector('#author');
+            const pages = document.querySelector('#pages');
+            const read = document.querySelector('#read');
+
+            let index = btn.getAttribute('data-item');
+            title.value = myLibrary[index].title;
+            author.value = myLibrary[index].author;
+            pages.value = myLibrary[index].pages;
+            let ifChecked = myLibrary[index].read;
+            // Important: if finish reading, set checkbox as checked
+            // else, remove checked from checkbox
+            ifChecked?read.setAttribute('checked', 'true'):
+                    read.removeAttribute('checked');
+            // set data- on edit btn
+            edit.setAttribute('data-item', index);
+            
+            display();
+        });
+    });
+
     console.log(myLibrary);
 }
 
