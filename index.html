@@ -11,30 +11,32 @@
 <body>
     <div class="container">
         <div class="left-container">
-            <div class="logo">
-                <div></div>
-                <h1>Library</h1>
+            <div class="logo-container">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>
+                </div>
+                <div class="text">Library</div>
             </div>
             <form action="" method="">
                 <div class="head">Add A New Book</div>
                 <div class="form-control">
-                    <label for="title" class="title">Title:</label>
+                    <label for="title" class="title">TITLE:</label>
                     <input type="text"  id="title" name="title" required
                      minlength="2" maxlength="30" placeholder="Harry Potter">
                 </div>
                 <div class="form-control">
-                    <label for="author" class="author">Author:</label>
+                    <label for="author" class="author">AUTHOR:</label>
                     <input type="text"  id="author" name="author" required
                     minlength="2" maxlength="30" placeholder="J.K. Rowling">
                 </div>
                 <div class="form-control">
-                    <label for="pages" class="pages">Total Pages:</label>
+                    <label for="pages" class="pages">TOTAL PAGES:</label>
                     <input type="number" name="pages" id="pages" required
                     min="1" placeholder="625">
                 </div>
                 <div class="form-control">
                     <input type="checkbox" name="read" id="read">
-                    <label for="read">I have finished this book!</label>
+                    <label for="read" class="read">I HAVE READ THIS BOOK!</label>
                 </div>
                 <button type="submit" id="add" name="add">ADD</button>
                 <button type="button" id="edit" name="edit">EDIT</button>

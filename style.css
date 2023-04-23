@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -18,7 +19,91 @@
 
 .left-container {
     background-color: var(--main--color--);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
 }
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    width: 3rem;
+    height: 3rem;
+}
+
+svg {
+    fill: var(--fifth-color--);
+}
+
+.text {
+    font-size: 3rem;
+    font-weight: bolder;
+    color: var(--fifth-color--);
+}
+
+form {
+    /* push footer down */
+    flex: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: white;
+}
+
+.head {
+    font-size: 2rem;
+}
+
+/* label */
+.title,
+.author,
+.pages{
+    display: block;
+}
+
+label {
+    font-size: 900;
+}
+
+input {
+    font-size: 1.2rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 20vw;
+    border: 1px solid #dddcdc;
+    border-radius: 0.3rem;
+    height: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+
+/* use ':has' pseudo-class to change label
+ color when input:focus */
+.form-control:has(input:focus) label{
+    color: var(--fifth-color--);
+}
+
+button[type="submit"],
+button[type="button"] {
+    background-color: var(--fifth-color--);
+    color: white;
+    padding: 0.7rem 2.5rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    box-shadow: 2px 2px 3px silver;
+    margin: 1rem 0 2rem 0;
+}
+
 .right-container {
     background-color: var(--third--color--);
 }
@@ -32,7 +117,10 @@
 
 .toggleBtn:hover,
 .removeBtn:hover,
-.editBtn:hover {
+.editBtn:hover,
+input[type="checkbox"],
+button[type="submit"]:hover,
+button[type="button"]:hover {
     cursor: pointer;
     font-weight: bolder;
 }
@@ -46,3 +134,4 @@
 .editBtn:hover {
     opacity: 1;
 }
+
