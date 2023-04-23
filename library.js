@@ -27,16 +27,39 @@ addBookToLibrary(peppaPig);
 addBookToLibrary(olivia);
 addBookToLibrary(panda);
 addBookToLibrary(splat);
+// Add book to library manually
+function addBookToLibrary(book) {
+    myLibrary.push(book);
+  }
 
 display();
 
 // Add book to library event
 // Important: hook submit event to form instead of button
 form.addEventListener('submit', addToLibrary, true);
+// Add book to library by form
+function addToLibrary(event){
+    console.log(event);
+    event.preventDefault();
+    event.stopPropagation();
+    
+    let checkRead = read.checked?true:false;
+    let book = new Book(
+        title.value, 
+        author.value,
+        pages.value,
+        checkRead);
+    myLibrary.push(book);
+    console.log(myLibrary);
+    // clear inputs
+    clear();
+    // display myLibrary 
+    display();
+    
+}
 
 // submit edit btn
 edit.addEventListener('click', editToLibrary);
-
 function editToLibrary(){
     let index = edit.getAttribute('data-item');
     console.log(`index: ${index}`);
@@ -71,38 +94,12 @@ function Book(title, author, pages, read) {
   };
 }
 
-// Add book to library manually
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-}
-
-// Add book to library by form
-function addToLibrary(event){
-    console.log(event);
-    event.preventDefault();
-    event.stopPropagation();
-    
-    let checkRead = read.checked?true:false;
-    let book = new Book(
-        title.value, 
-        author.value,
-        pages.value,
-        checkRead);
-    myLibrary.push(book);
-    console.log(myLibrary);
-    // clear inputs
-    clear();
-    // display myLibrary 
-    display();
-    
-}
-
 function display(){
     tbody.innerHTML = '';
     for(let book of myLibrary){
         let tr = document.createElement('tr');
         let index = myLibrary.indexOf(book);
-        console.log(`book index: ${index}`);
+        // console.log(`book index: ${index}`);
         tr.setAttribute('data-item', index);
         
         let td1 = document.createElement('td');
@@ -203,12 +200,6 @@ function display(){
             add.style.display = 'none';
             edit.style.display = 'block';
 
-            
-            const title = document.querySelector('#title');
-            const author = document.querySelector('#author');
-            const pages = document.querySelector('#pages');
-            const read = document.querySelector('#read');
-
             let index = btn.getAttribute('data-item');
             title.value = myLibrary[index].title;
             author.value = myLibrary[index].author;
@@ -225,7 +216,6 @@ function display(){
         });
     });
 
-    console.log(myLibrary);
 }
 
 // Clear form inputs
