@@ -62,12 +62,12 @@ function addToLibrary(event){
 edit.addEventListener('click', editToLibrary);
 function editToLibrary(){
     let index = edit.getAttribute('data-item');
-    console.log(`index: ${index}`);
+    // console.log(`index: ${index}`);
     myLibrary[index].title = title.value;
     myLibrary[index].author = author.value;
     myLibrary[index].pages = pages.value;
     myLibrary[index].read = read.checked;
-    console.log(myLibrary[index]);
+    // console.log(myLibrary[index]);
 
     display();
     clear();
@@ -85,12 +85,6 @@ function Book(title, author, pages, read) {
   this.read = read;
   this.toggle = function(){
     this.read = !this.read;
-  };
-  this.edit = function(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
   };
 }
 
@@ -167,9 +161,9 @@ function display(){
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             let index = btn.getAttribute('data-item');
-            console.log(`index: ${index}`);
+            // console.log(`index: ${index}`);
             myLibrary[index].toggle();
-            console.log(myLibrary[index]);
+            // console.log(myLibrary[index].read);
             btn.textContent = myLibrary[index].read?'V':'X';
             btn.style.color = myLibrary[index].read?'green':'red';
         });
@@ -180,14 +174,14 @@ function display(){
     removeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             let index = btn.getAttribute('data-item');
-            console.log(`index: ${index}`);
+            // console.log(`index: ${index}`);
             // Associate DOM element with book object using data- attribute
             let tr = document.querySelector(`tr[data-item='${index}']`);
-            console.log(`tr:${tr}`);
+            // console.log(`tr:${tr}`);
             tbody.removeChild(tr);
             // remove book from library
             myLibrary.splice(index, 1);
-            console.log(myLibrary);
+            // console.log(myLibrary);
             display();
         });
     });
