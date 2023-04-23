@@ -6,6 +6,7 @@ const form = document.querySelector('form');
 const head = document.querySelector('.head');
 const add = document.querySelector('#add');
 const edit = document.querySelector('#edit');
+const cancel = document.querySelector('#cancel');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
@@ -18,8 +19,9 @@ const olivia = new Book('Dinner with Olivia', 'Emily Sollinger', 18, false);
 const panda = new Book('Please, Mr. Panda', 'Steve Antony', 22, true);
 const splat = new Book('Splat the Cat Twice the Mice', 'Rob Scotton', 28, true);
 
-// Default: show add btn, hide edit btn
+// Default: show add btn, hide edit and cancel btns
 edit.style.display = 'none';
+cancel.style.display = 'none';
 
 // Add book to library manually
 addBookToLibrary(harryPotter);
@@ -50,7 +52,7 @@ function addToLibrary(event){
         pages.value,
         checkRead);
     myLibrary.push(book);
-    console.log(myLibrary);
+    // console.log(myLibrary);
     // clear inputs
     clear();
     // display myLibrary 
@@ -68,12 +70,20 @@ function editToLibrary(){
     myLibrary[index].pages = pages.value;
     myLibrary[index].read = read.checked;
     // console.log(myLibrary[index]);
-
     display();
-    clear();
+    changeToAdd();
+}
+
+// cancel btn
+cancel.addEventListener('click', changeToAdd);
+
+function changeToAdd(){
     head.innerHTML = 'Add A New Book';
     add.style.display = 'block';
     edit.style.display = 'none';
+    cancel.style.display = 'none';
+
+    clear();
 }
 
 
@@ -193,6 +203,7 @@ function display(){
             head.innerHTML = 'Edit the Book';
             add.style.display = 'none';
             edit.style.display = 'block';
+            cancel.style.display = 'block';
 
             let index = btn.getAttribute('data-item');
             title.value = myLibrary[index].title;
