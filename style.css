@@ -24,21 +24,25 @@
 }
 
 .toggleBtn, 
-.removeBtn {
+.removeBtn,
+.editBtn {
     background-color: var(--third--color--);
     border: none;
 }
 
 .toggleBtn:hover,
-.removeBtn:hover {
+.removeBtn:hover,
+.editBtn:hover {
     cursor: pointer;
     font-weight: bolder;
 }
 
-.removeBtn {
+.removeBtn,
+.editBtn {
     opacity: 0.6;
 }
 
-.removeBtn:hover {
+.removeBtn:hover,
+.editBtn:hover {
     opacity: 1;
 }
