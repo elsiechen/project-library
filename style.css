@@ -96,14 +96,35 @@ button[type="submit"],
 button[type="button"] {
     background-color: var(--fifth-color--);
     color: white;
-    padding: 0.7rem 2.5rem;
+    padding: 0.7rem 2rem;
+    border: none;
     border-radius: 10px;
     font-size: 0.8rem;
     font-weight: bolder;
-    box-shadow: 2px 2px 3px silver;
-    margin: 1rem 0 2rem 0;
+    box-shadow: 2px 2px 3px var(--second--color--);
+    margin: 1rem 0 1rem 0;
 }
 
+.edit-cancel {
+    display: flex;    
+    justify-content: space-around;
+}
+
+button[name="edit"],
+button[name="cancel"] {
+    width: 8rem;
+}
+
+footer {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    align-self: center;
+}
+
+a{
+    color: white;
+}
 .right-container {
     background-color: var(--third--color--);
 }
