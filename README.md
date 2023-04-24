@@ -1,6 +1,7 @@
 # Project: Library
 This is a simple library app created with HTML, CSS, and JavaScript. It allows users to create, read, update, and delete book items to track user's book reading status.
 
+![App Dashboard](dashboard.png)
 ## Table of Contents
 - Demo
 - Technologies Used
