@@ -125,9 +125,48 @@ footer {
 a{
     color: white;
 }
+
 .right-container {
     background-color: var(--third--color--);
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
+
+thead {
+    height: 2rem;
+    background-color: var(--fifth-color--);
+    color: white;
+}
+
+th, 
+td {
+    width: 80px;
+    padding: 0 0 0 2rem;
+}
+
+th:first-child,
+td:first-child {
+    width: 300px;
+}
+
+th:first-child+th,
+td:first-child+td {
+    width: 200px;
+}
+
+tr {
+    display: flex;
+    justify-content: start;
+    padding: 1rem;
+}
+
+tbody tr {
+    border-bottom: 3px dotted white;
+}
+ 
+
 
 .toggleBtn, 
 .removeBtn,
