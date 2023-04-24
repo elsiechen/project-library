@@ -8,7 +8,7 @@ This is a simple library app created with HTML, CSS, and JavaScript. It allows u
 - Credits
 
 ## Demo
-Check out the [**live**]() demo.
+Check out the [**live**](https://elsiechen.github.io/project-library/) demo.
 
 ## Technologies Used
 - HTML
